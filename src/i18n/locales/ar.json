@@ -1,23 +1,10 @@
 {
   "startLesson": {
-    "title": "هل أنت مستعد لبدء درسك؟",
-    "subtitle": "دعنا نبدأ رحلة التعلم اليوم!",
-    "startButton": "ابدأ الدرس",
-    "reviewButton": "مراجعة السابق",
-    "welcome": "مرحباً بك في فكرة للتعلم",
-    "getStarted": "ابدأ الآن",
-    "languageChanged": "تم تغيير اللغة",
-    "languageChangedMessage": "تم تحديث لغة الواجهة بنجاح!"
-  },
-  "common": {
-    "loading": "جاري التحميل...",
-    "error": "حدث خطأ ما",
-    "retry": "حاول مرة أخرى",
-    "cancel": "إلغاء",
-    "confirm": "تأكيد",
-    "next": "التالي",
-    "previous": "السابق",
-    "done": "تم",
-    "ok": "موافق"
+    "headerTitle": "تعلم الإسبانية",
+    "lessonTitle": "التحيات والتعارف",
+    "lessonDescription": "تعلم كيفية قول مرحبا، وداعا، وتعريف نفسك بالإسبانية.",
+    "estimatedTime": "الوقت المتوقع",
+    "timeMinutes": "5 دقائق",
+    "languageToggle": "EN"
   }
 }
