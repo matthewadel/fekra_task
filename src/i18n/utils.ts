@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import { useLanguageStore } from '../store';
+import { useLanguageStore } from '@/store';
 
 export const changeLanguage = async (language: string) => {
   // Use Zustand store to change language (which will also update i18n)

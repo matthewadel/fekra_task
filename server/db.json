@@ -1,5 +1,5 @@
 {
-  "exercises": {
+  "lesson": {
     "id": "lesson-basics-1",
     "title": "Basics 1 — Greetings",
     "xp_per_correct": 10,
@@ -15,7 +15,7 @@
           "Gracias"
         ],
         "answer": "Hola",
-        "explanation_en": "\"Hola\" means Hello in Spanish."
+        "explanation": "\"Hola\" means Hello in Spanish."
       },
       {
         "id": "ex2",
@@ -28,7 +28,7 @@
           "caseInsensitive": true,
           "trim": true
         },
-        "explanation_en": "\"Gracias\" means Thank you."
+        "explanation": "\"Gracias\" means Thank you."
       },
       {
         "id": "ex3",
@@ -46,7 +46,7 @@
           "hasta",
           "luego"
         ],
-        "explanation_en": "Phrase commonly taught as a set: \"Hasta luego.\""
+        "explanation": "Phrase commonly taught as a set: \"Hasta luego.\""
       },
       {
         "id": "ex4",
@@ -62,7 +62,7 @@
             "right": "Adiós"
           }
         ],
-        "explanation_en": "Match each English word to its Spanish translation."
+        "explanation": "Match each English word to its Spanish translation."
       },
       {
         "id": "ex5",
@@ -74,7 +74,7 @@
           "Por favor"
         ],
         "answer": "Adiós",
-        "explanation_en": "\"Adiós\" is Goodbye."
+        "explanation": "\"Adiós\" is Goodbye."
       },
       {
         "id": "ex6",
@@ -87,7 +87,7 @@
           "caseInsensitive": true,
           "trim": true
         },
-        "explanation_en": "\"Por favor\" means Please."
+        "explanation": "\"Por favor\" means Please."
       }
     ]
   }

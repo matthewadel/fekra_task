@@ -3,14 +3,14 @@ import { Platform, StyleSheet, Text as RNText, TextStyle } from 'react-native';
 import { s } from 'react-native-size-matters';
 
 import { Colors } from './colors';
-import i18n from '../i18n';
-import { FONT_FAMILY } from '../types/ui/fonts';
-import { IText } from '../types';
+import i18n from '@/i18n';
+import { FONT_FAMILY } from '@/types/ui/fonts';
+import { IText } from '@/types';
 
 const Text = (props: IText) => {
   let defaultStyle = {
     fontSize: s(16),
-    color: Colors().dark,
+    color: Colors.dark,
     textShadowOffset: { width: 0, height: 0 },
     fontFamily: FONT_FAMILY(),
   };

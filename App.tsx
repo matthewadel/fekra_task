@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { MainStack } from './src/navigation';
 import './src/i18n'; // Initialize i18n
 import { useLanguageStore } from './src/store';
+import { ScreenDimensionsProvider } from './src/context';
 
 function App() {
   const { hasHydrated, initializeLanguage } = useLanguageStore();
@@ -15,9 +16,11 @@ function App() {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <MainStack />
-      </NavigationContainer>
+      <ScreenDimensionsProvider>
+        <NavigationContainer>
+          <MainStack />
+        </NavigationContainer>
+      </ScreenDimensionsProvider>
     </SafeAreaProvider>
   );
 }
