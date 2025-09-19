@@ -1,0 +1,23 @@
+{
+  "startLesson": {
+    "title": "Ready to Start Your Lesson?",
+    "subtitle": "Let's begin your learning journey today!",
+    "startButton": "Start Lesson",
+    "reviewButton": "Review Previous",
+    "welcome": "Welcome to Fekra Learning",
+    "getStarted": "Get Started Now",
+    "languageChanged": "Language Changed",
+    "languageChangedMessage": "The interface language has been updated successfully!"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try Again",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "next": "Next",
+    "previous": "Previous",
+    "done": "Done",
+    "ok": "OK"
+  }
+}
