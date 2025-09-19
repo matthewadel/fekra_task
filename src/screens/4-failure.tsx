@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, View, Colors, ScreenContainer, Button } from '@/ui';
 import { s } from 'react-native-size-matters';
@@ -6,12 +6,14 @@ import { useExerciseStore } from '@/store';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useHapticFeedback } from '@/hooks';
 
 const Failure = () => {
   const { t } = useTranslation();
   const { resetExercises, currentTimer, currentTrials, currentStreak } =
     useExerciseStore();
   const navigation = useNavigation<any>();
+  const { triggerHaptic } = useHapticFeedback();
 
   // Calculate mistakes - either timeout or incorrect trials
   const mistakes = currentTimer <= 0 ? 'timeout' : 3 - currentTrials;
@@ -20,7 +22,15 @@ const Failure = () => {
       ? t('failure.timeoutMessage')
       : t('failure.incorrectAnswers', { count: mistakes });
 
+  useEffect(() => {
+    // Trigger error haptic feedback when component mounts
+    triggerHaptic('error');
+  }, [triggerHaptic]);
+
   const handleRestartLesson = () => {
+    // Light haptic feedback on button press
+    triggerHaptic('light');
+
     resetExercises();
     navigation.reset({
       index: 0,

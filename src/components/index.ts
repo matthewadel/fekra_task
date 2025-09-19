@@ -4,3 +4,4 @@ export * from './match-pairs';
 export * from './multiple-choice';
 export * from './translation';
 export * from './exercise-button';
+export * from './celebration-animation';

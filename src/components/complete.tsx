@@ -11,7 +11,7 @@ const Complete: React.FC<{
   exercise: IExercises;
 }> = ({ exercise }) => {
   const { width } = useWindowDimensions();
-  const { decrementTrials } = useExerciseStore();
+  const { decrementTrials, incrementStreak } = useExerciseStore();
 
   // State for selected answers in order
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>(
@@ -72,7 +72,8 @@ const Complete: React.FC<{
 
       setIsCorrect(correct);
 
-      if (!correct) decrementTrials();
+      if (correct) incrementStreak();
+      else decrementTrials();
     }
   };
 

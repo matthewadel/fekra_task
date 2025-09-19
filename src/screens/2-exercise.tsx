@@ -17,7 +17,6 @@ const Exercise = () => {
   const { lesson } = useLessonStore();
   const exercises = lesson?.exercises;
   const FlatListRef = useRef<FlatList<IExercises>>(null);
-  console.log(exercises);
   const { currentTrials, currentIndex } = useExerciseStore();
   const Navigation = useNavigation<any>();
 

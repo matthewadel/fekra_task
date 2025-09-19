@@ -7,7 +7,7 @@ export interface ExerciseState {
   currentIndex: number;
   currentTimer: number;
   currentTrials: number;
-  incrementStreak: (streak: number) => void;
+  incrementStreak: () => void;
   increaseCurrentIndex: () => void;
   saveTimer: (timer: number) => void;
   decrementTrials: () => void;
@@ -23,12 +23,10 @@ export const useExerciseStore = create<ExerciseState>()(
       currentTimer: 300, // Default timer value in seconds
       currentTrials: 3, // Default number of trials
 
-      incrementStreak: (streak: number) => {
+      incrementStreak: () => {
         set(state => {
-          console.log(streak);
-          console.log(state.currentStreak);
           return {
-            currentStreak: state.currentStreak + streak,
+            currentStreak: state.currentStreak + 1,
           };
         });
       },
@@ -51,6 +49,7 @@ export const useExerciseStore = create<ExerciseState>()(
 
       resetExercises: () => {
         set({
+          currentStreak: 0,
           currentIndex: 0,
           currentTimer: 300,
           currentTrials: 3,
@@ -60,12 +59,6 @@ export const useExerciseStore = create<ExerciseState>()(
     {
       name: 'exercise-storage',
       storage: createJSONStorage(() => AsyncStorage),
-      partialize: state => ({
-        currentStreak: state.currentStreak,
-        currentIndex: state.currentIndex,
-        currentTimer: state.currentTimer,
-        currentTrials: state.currentTrials,
-      }),
     },
   ),
 );

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Colors, ScreenContainer, Button } from '@/ui';
 import { StyleSheet } from 'react-native';
 import { s } from 'react-native-size-matters';
@@ -6,14 +6,34 @@ import { useLessonStore, useExerciseStore } from '@/store';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { CelebrationAnimation } from '@/components';
+import { useHapticFeedback } from '@/hooks';
+import { Balloons } from 'react-native-fiesta';
 
 const Success = () => {
   const { t } = useTranslation();
   const { lesson } = useLessonStore();
-  const { resetExercises, incrementStreak, currentStreak } = useExerciseStore();
+  const { resetExercises, currentStreak } = useExerciseStore();
   const navigation = useNavigation<any>();
+  const [showCelebration, setShowCelebration] = useState(false);
+  const { triggerHaptic } = useHapticFeedback();
+
+  useEffect(() => {
+    // Trigger haptic feedback and celebration animation when component mounts
+    triggerHaptic('success');
+
+    // Small delay to ensure the screen has loaded
+    const timer = setTimeout(() => {
+      setShowCelebration(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [triggerHaptic]);
 
   const handleRestartLesson = () => {
+    // Light haptic feedback on button press
+    triggerHaptic('light');
+
     resetExercises(); // Reset exercise state to start from beginning
     navigation.reset({
       index: 0,
@@ -21,16 +41,17 @@ const Success = () => {
     });
   };
 
-  useEffect(() => {
-    incrementStreak(lesson?.streak_increment || 1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lesson]);
-
   return (
     <ScreenContainer style={styles.container}>
-      {/* Main Star Icon */}
+      {/* Celebration Animation */}
+      <Balloons />
+
       <View style={styles.iconContainer}>
-        <Ionicons name="star" size={s(96)} color={Colors.primary} />
+        <CelebrationAnimation
+          trigger={showCelebration}
+          size={s(96)}
+          color={Colors.primary}
+        />
       </View>
 
       {/* Title and Description */}

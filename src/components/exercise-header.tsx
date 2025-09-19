@@ -7,8 +7,13 @@ import { useExerciseStore, useLessonStore } from '@/store';
 import { useNavigation } from '@react-navigation/native';
 
 const ExerciseHeader = () => {
-  const { currentIndex, currentTimer, currentTrials, saveTimer } =
-    useExerciseStore();
+  const {
+    currentIndex,
+    currentTimer,
+    currentTrials,
+    saveTimer,
+    currentStreak,
+  } = useExerciseStore();
   const { lesson } = useLessonStore();
   const exerxcises = lesson?.exercises || [];
   const Navigation = useNavigation<any>();
@@ -64,15 +69,29 @@ const ExerciseHeader = () => {
         />
       </View>
 
-      {/* Hearts Section */}
-      <View style={styles.heartsContainer}>
-        <Icon
-          name={'favorite'}
-          size={moderateScale(20)}
-          color={Colors.red}
-          style={styles.heartIcon}
-        />
-        <Text>{currentTrials}</Text>
+      {/* Streak and Hearts Section */}
+      <View style={styles.statsContainer}>
+        {/* Streak */}
+        <View style={styles.statItem}>
+          <Icon
+            name={'local-fire-department'}
+            size={moderateScale(20)}
+            color={currentStreak > 2 ? '#FF6B35' : Colors.primary}
+            style={styles.streakIcon}
+          />
+          <Text style={styles.statText}>{currentStreak}</Text>
+        </View>
+
+        {/* Hearts */}
+        <View style={styles.statItem}>
+          <Icon
+            name={'favorite'}
+            size={moderateScale(20)}
+            color={currentTrials <= 1 ? '#DC2626' : Colors.red}
+            style={styles.heartIcon}
+          />
+          <Text style={styles.statText}>{currentTrials}</Text>
+        </View>
       </View>
     </View>
   );
@@ -103,11 +122,25 @@ const styles = StyleSheet.create({
   timerWarning: {
     color: Colors.red,
   },
-  heartsContainer: {
+  statsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: scale(12),
+  },
+  statItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: scale(12),
+  },
+  statText: {
+    fontSize: moderateScale(14),
+    fontWeight: '600',
+    color: Colors.dark,
+    marginLeft: scale(4),
+  },
+  streakIcon: {
+    marginHorizontal: scale(2),
   },
   heartIcon: {
     marginHorizontal: scale(2),

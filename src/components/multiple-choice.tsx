@@ -10,13 +10,14 @@ import { ExerciseButton } from './exercise-button';
 const MultipleChoice: React.FC<{
   exercise: IExercises;
 }> = ({ exercise }) => {
-  const { decrementTrials } = useExerciseStore();
+  const { decrementTrials, incrementStreak } = useExerciseStore();
   const { width } = useWindowDimensions();
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
   const handleAnswerPress = (choice: string) => {
     setSelectedAnswer(choice);
-    if (choice !== exercise.answer) decrementTrials();
+    if (choice === exercise.answer) incrementStreak();
+    else decrementTrials();
   };
 
   const getButtonStyle = (choice: string) => {

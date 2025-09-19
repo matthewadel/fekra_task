@@ -13,7 +13,7 @@ const Translation: React.FC<{
   const [userInput, setUserInput] = useState('');
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const { decrementTrials } = useExerciseStore();
+  const { decrementTrials, incrementStreak } = useExerciseStore();
 
   const handleTextChange = (text: string) => {
     setUserInput(text);
@@ -53,7 +53,8 @@ const Translation: React.FC<{
       const correct = validateAnswer(userInput);
       setIsCorrect(correct);
 
-      if (!correct) decrementTrials();
+      if (correct) incrementStreak();
+      else decrementTrials();
     }
   };
 
