@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useLanguageStore } from '@/store';
+import { useExerciseStore, useLanguageStore } from '@/store';
 import { useNavigation } from '@react-navigation/native';
-import { Text, View, TouchableOpacity, Colors, ScreenContainer } from '@/ui';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Colors,
+  ScreenContainer,
+  Button,
+} from '@/ui';
 import { s, vs } from 'react-native-size-matters';
 import { useGetLesson } from '@/hooks';
 
@@ -14,13 +21,21 @@ const Start = () => {
   const { currentLanguage, setLanguage } = useLanguageStore();
   const Navigation = useNavigation<any>();
   const { lesson, loading, error, refetch } = useGetLesson();
+  const { currentIndex, increaseCurrentIndex } = useExerciseStore();
 
   const handleLanguageToggle = async () => {
     const newLang = currentLanguage === 'en' ? 'ar' : 'en';
     await setLanguage(newLang);
   };
-  console.log('lesson', lesson);
+
+  useEffect(() => {
+    if (currentIndex) {
+      Navigation.navigate('Exercise');
+    }
+  }, [currentIndex, Navigation]);
+
   const handleStartLesson = () => {
+    increaseCurrentIndex();
     Navigation.navigate('Exercise');
   };
 
@@ -53,7 +68,7 @@ const Start = () => {
                   adjustsFontSizeToFit
                   style={styles.statLabel}
                 >
-                  Streak Bonus
+                  {t('startLesson.streakBonus')}
                 </Text>
                 <Text style={styles.statValue}>+{lesson.streak_increment}</Text>
               </View>
@@ -69,7 +84,7 @@ const Start = () => {
                   adjustsFontSizeToFit
                   style={styles.statLabel}
                 >
-                  XP per Correct
+                  {t('startLesson.xpPerCorrect')}
                 </Text>
                 <Text style={styles.statValue}>{lesson.xp_per_correct} XP</Text>
               </View>
@@ -89,11 +104,9 @@ const Start = () => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.startButton} onPress={handleStartLesson}>
-        <Text style={styles.startButtonText}>
-          {t('startLesson.startButton')}
-        </Text>
-      </TouchableOpacity>
+      <Button onPress={handleStartLesson} style={styles.buttonStyle}>
+        {t('startLesson.startButton')}
+      </Button>
     </ScreenContainer>
   );
 };
@@ -127,14 +140,6 @@ const styles = StyleSheet.create({
     marginBottom: vs(8),
     fontWeight: 'bold',
   },
-  lessonDescription: {
-    color: Colors.dark,
-    textAlign: 'center',
-    marginBottom: vs(32),
-    maxWidth: s(280),
-    lineHeight: vs(22),
-  },
-
   // Lesson stats styles
   lessonStats: {
     flexDirection: 'row',
@@ -186,6 +191,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#E5E7EB',
     marginHorizontal: s(12),
   },
+  buttonStyle: {
+    marginHorizontal: s(24),
+  },
 
   // Time card styles
   timeCard: {
@@ -216,104 +224,6 @@ const styles = StyleSheet.create({
     color: Colors.dark,
     fontSize: s(16),
     marginTop: vs(2),
-  },
-  startButton: {
-    backgroundColor: Colors.primary,
-    width: '100%',
-    paddingVertical: vs(10),
-    borderRadius: s(25),
-    alignItems: 'center',
-    shadowColor: Colors.primary,
-    marginHorizontal: s(24),
-    marginBottom: vs(24),
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: s(8),
-    elevation: 8,
-  },
-  startButtonText: {
-    color: Colors.white,
-    fontSize: s(18),
-  },
-
-  // Exercises section styles
-  exercisesSection: {
-    width: '100%',
-    marginTop: vs(24),
-    paddingHorizontal: s(16),
-  },
-  exercisesTitle: {
-    fontSize: s(18),
-    fontWeight: 'bold',
-    color: Colors.dark,
-    marginBottom: vs(16),
-    textAlign: 'center',
-  },
-
-  // Loading styles
-  loadingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: s(20),
-  },
-  loadingText: {
-    marginLeft: s(8),
-    fontSize: s(14),
-    color: Colors.dark,
-  },
-
-  // Exercise list styles
-  exercisesList: {
-    maxHeight: vs(200),
-    backgroundColor: '#F8F9FA',
-    borderRadius: s(8),
-    padding: s(8),
-  },
-  exerciseCard: {
-    backgroundColor: Colors.white,
-    padding: s(12),
-    marginBottom: vs(8),
-    borderRadius: s(6),
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-  },
-  exerciseTitle: {
-    fontSize: s(16),
-    fontWeight: 'bold',
-    color: Colors.dark,
-    marginBottom: vs(4),
-  },
-  exerciseDescription: {
-    fontSize: s(14),
-    color: '#6B7280',
-    marginBottom: vs(8),
-    lineHeight: vs(18),
-  },
-  exerciseMetadata: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  exerciseDifficulty: {
-    fontSize: s(12),
-    color: Colors.primary,
-    fontWeight: '500',
-    textTransform: 'capitalize',
-  },
-  exerciseDuration: {
-    fontSize: s(12),
-    color: '#6B7280',
-    fontWeight: '500',
-  },
-  noExercisesText: {
-    fontSize: s(14),
-    color: '#6B7280',
-    textAlign: 'center',
-    padding: s(20),
   },
 });
 

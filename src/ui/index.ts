@@ -5,3 +5,4 @@ export * from './view';
 export * from './loading-screen';
 export * from './screen-container';
 export * from './touchable-opacity';
+export * from './button';

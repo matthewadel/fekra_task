@@ -1,5 +1,5 @@
 export interface IExercises {
-  answer: string;
+  answer: string | string[];
   choices: string[];
   bank: string[];
   explanation: string;

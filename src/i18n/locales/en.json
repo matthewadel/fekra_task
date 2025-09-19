@@ -6,6 +6,31 @@
     "estimatedTime": "Estimated time",
     "timeMinutes": "5 min",
     "languageToggle": "عربي",
-    "startButton": "Start Lesson"
+    "startButton": "Start Lesson",
+    "streakBonus": "Streak Bonus",
+    "xpPerCorrect": "XP per Correct"
+  },
+  "exercise": {
+    "continue": "Continue",
+    "check": "Check"
+  },
+  "success": {
+    "title": "Lesson Complete!",
+    "description": "You've successfully completed the lesson and earned valuable XP. Keep up the great work!",
+    "xpEarned": "XP Earned",
+    "streakIncreased": "Streak Increased",
+    "streakValue_one": "+{{count}}",
+    "streakValue_other": "+{{count}}",
+    "restartLesson": "Restart Lesson"
+  },
+  "failure": {
+    "title": "Test Failed",
+    "description": "Don't worry, it happens to the best of us. Let's try again. Practice makes perfect!",
+    "mistakes": "Mistakes",
+    "timeoutMessage": "Time ran out",
+    "incorrectAnswers_one": "{{count}} incorrect",
+    "incorrectAnswers_other": "{{count}} incorrect",
+    "currentStreak": "Current Streak",
+    "restartLesson": "Restart Lesson"
   }
 }

@@ -6,6 +6,31 @@
     "estimatedTime": "الوقت المتوقع",
     "timeMinutes": "5 دقائق",
     "languageToggle": "EN",
-    "startButton": "ابدأ الدرس"
+    "startButton": "ابدأ الدرس",
+    "streakBonus": "مكافأة التسلسل",
+    "xpPerCorrect": "XP للإجابة الصحيحة"
+  },
+  "exercise": {
+    "continue": "استمر",
+    "check": "تحقق"
+  },
+  "success": {
+    "title": "تم إكمال الدرس!",
+    "description": "لقد أكملت الدرس بنجاح وكسبت XP قيمة. استمر في العمل الرائع!",
+    "xpEarned": "XP المكتسبة",
+    "streakIncreased": "زيادة التسلسل",
+    "streakValue_one": "+{{count}}",
+    "streakValue_other": "+{{count}}",
+    "restartLesson": "إعادة تشغيل الدرس"
+  },
+  "failure": {
+    "title": "فشل الاختبار",
+    "description": "لا تقلق، يحدث هذا لأفضلنا. دعنا نحاول مرة أخرى. التدريب يؤدي إلى الكمال!",
+    "mistakes": "الأخطاء",
+    "timeoutMessage": "انتهى الوقت",
+    "incorrectAnswers_one": "{{count}} إجابة خاطئة",
+    "incorrectAnswers_other": "{{count}} إجابات خاطئة",
+    "currentStreak": "التسلسل الحالي",
+    "restartLesson": "إعادة تشغيل الدرس"
   }
 }

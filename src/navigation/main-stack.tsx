@@ -15,8 +15,8 @@ export const MainStack: React.FC = () => {
     >
       <Stack.Screen name="Start" component={screens.Start} />
       <Stack.Screen name="Exercise" component={screens.Exercise} />
-      <Stack.Screen name="success" component={screens.success} />
-      <Stack.Screen name="failure" component={screens.failure} />
+      <Stack.Screen name="Success" component={screens.Success} />
+      <Stack.Screen name="Failure" component={screens.Failure} />
     </Stack.Navigator>
   );
 };
