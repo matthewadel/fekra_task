@@ -42,7 +42,7 @@ const Start = () => {
         executionTimeout = setTimeout(() => {
           if (lesson?.exercises[currentIndex - 1]?.userAnswer)
             increaseCurrentIndex();
-          Navigation.navigate('Exercise');
+          Navigation.replace('Exercise');
         }, 500);
       }
 
@@ -54,7 +54,7 @@ const Start = () => {
   const handleStartLesson = () => {
     if (!currentIndex || lesson?.exercises[currentIndex - 1]?.userAnswer)
       increaseCurrentIndex();
-    Navigation.navigate('Exercise');
+    Navigation.replace('Exercise');
   };
 
   return (

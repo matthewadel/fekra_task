@@ -1,7 +1,7 @@
 import { ILesson } from '@/types';
 import { useCallback, useEffect } from 'react';
-import { Platform } from 'react-native';
 import { useExerciseStore, useLessonStore } from '@/store';
+import { lessonData } from '@/data/lessonData';
 
 interface UseGetLessonResult {
   lesson: ILesson | null;
@@ -9,15 +9,6 @@ interface UseGetLessonResult {
   error: string | null;
   refetch: () => void;
 }
-
-const getBaseUrl = () => {
-  if (Platform.OS === 'android') {
-    // For Android emulator, use 10.0.2.2 to access host machine's localhost
-    // For physical Android device, you'd need to use your computer's IP address
-    return 'http://10.0.2.2:3000';
-  }
-  return 'http://localhost:3000';
-};
 
 export const useGetLesson = (): UseGetLessonResult => {
   const { lesson, loading, error, setLesson, setLoading, setError } =
@@ -29,22 +20,19 @@ export const useGetLesson = (): UseGetLessonResult => {
       setLoading(true);
       setError(null);
 
-      const baseUrl = getBaseUrl();
-      const url = `${baseUrl}/lesson`;
+      // Simulate async operation with Promise.resolve
+      // Add a small delay to mimic network request
+      await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setLesson(data);
+      const data = await Promise.resolve(lessonData);
+      setLesson(data as unknown as ILesson);
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : 'Failed to fetch lesson';
       setError(errorMessage);
       console.error('Error fetching lesson:', err);
+    } finally {
+      setLoading(false);
     }
   }, [setLoading, setError, setLesson]);
 

@@ -24,9 +24,9 @@
     "matchPairs": {
       "title": "Match the pairs",
       "instruction": "Drag items to match:",
-      "dragHere": "📍 Drag here",
-      "correct": "✓ Correct! Well done!",
-      "incorrect": "✗ Try again!"
+      "dragHere": "Drag here",
+      "correct": "Correct! Well done!",
+      "incorrect": "Try again!"
     }
   },
   "success": {
