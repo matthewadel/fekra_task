@@ -49,7 +49,6 @@ export const useExerciseStore = create<ExerciseState>()(
 
       resetExercises: () => {
         set({
-          currentStreak: 0,
           currentIndex: 0,
           currentTimer: 300,
           currentTrials: 3,

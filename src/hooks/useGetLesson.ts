@@ -1,7 +1,7 @@
 import { ILesson } from '@/types';
 import { useCallback, useEffect } from 'react';
 import { Platform } from 'react-native';
-import { useLessonStore } from '@/store';
+import { useExerciseStore, useLessonStore } from '@/store';
 
 interface UseGetLessonResult {
   lesson: ILesson | null;
@@ -22,6 +22,7 @@ const getBaseUrl = () => {
 export const useGetLesson = (): UseGetLessonResult => {
   const { lesson, loading, error, setLesson, setLoading, setError } =
     useLessonStore();
+  const { currentIndex } = useExerciseStore();
 
   const fetchLesson = useCallback(async () => {
     try {
@@ -48,8 +49,8 @@ export const useGetLesson = (): UseGetLessonResult => {
   }, [setLoading, setError, setLesson]);
 
   useEffect(() => {
-    fetchLesson();
-  }, [fetchLesson]);
+    if (!currentIndex) fetchLesson();
+  }, [fetchLesson, currentIndex]);
 
   const refetch = () => fetchLesson();
 

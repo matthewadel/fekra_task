@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useExerciseStore, useLanguageStore, useLessonStore } from '@/store';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import {
   Text,
   View,
@@ -28,18 +28,31 @@ const Start = () => {
     const newLang = currentLanguage === 'en' ? 'ar' : 'en';
     await setLanguage(newLang);
   };
-
-  useEffect(() => {
-    if (currentIndex) {
-      if (lesson?.exercises[currentIndex - 1].userAnswer)
-        increaseCurrentIndex();
-      Navigation.navigate('Exercise');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentIndex, Navigation, lesson]);
   console.log('lesson', lesson);
+  useFocusEffect(
+    useCallback(() => {
+      let executionTimeout: ReturnType<typeof setTimeout>;
+      console.log('currentIndex', currentIndex);
+      console.log(
+        'userAnswer',
+        lesson?.exercises[currentIndex - 1]?.userAnswer,
+      );
+      console.log('lesson', lesson);
+      if (currentIndex) {
+        executionTimeout = setTimeout(() => {
+          if (lesson?.exercises[currentIndex - 1]?.userAnswer)
+            increaseCurrentIndex();
+          Navigation.navigate('Exercise');
+        }, 500);
+      }
+
+      return () => clearTimeout(executionTimeout);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentIndex, Navigation, lesson]),
+  );
+
   const handleStartLesson = () => {
-    if (!currentIndex || lesson?.exercises[currentIndex - 1].userAnswer)
+    if (!currentIndex || lesson?.exercises[currentIndex - 1]?.userAnswer)
       increaseCurrentIndex();
     Navigation.navigate('Exercise');
   };

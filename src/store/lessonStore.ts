@@ -22,38 +22,7 @@ export const useLessonStore = create<LessonState>()(
       error: null,
 
       setLesson: (lesson: ILesson) => {
-        set(state => {
-          // If there's a previous lesson with user answers, preserve them
-          if (state.lesson && state.lesson.exercises && lesson.exercises) {
-            const updatedExercises = lesson.exercises.map(newExercise => {
-              // Find corresponding exercise in previous lesson
-              const previousExercise = state.lesson!.exercises.find(
-                prevEx => prevEx.id === newExercise.id,
-              );
-
-              // If previous exercise exists and has a userAnswer, preserve it
-              if (
-                previousExercise &&
-                previousExercise.userAnswer !== undefined
-              ) {
-                return {
-                  ...newExercise,
-                  userAnswer: previousExercise.userAnswer,
-                };
-              }
-
-              return newExercise;
-            });
-
-            return {
-              lesson: { ...lesson, exercises: updatedExercises },
-              error: null,
-            };
-          }
-
-          // No previous lesson or exercises, just set the new lesson
-          return { lesson, error: null };
-        });
+        set({ lesson, error: null });
       },
 
       setLoading: (loading: boolean) => {

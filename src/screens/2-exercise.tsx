@@ -19,20 +19,28 @@ const Exercise = () => {
   const FlatListRef = useRef<FlatList<IExercises>>(null);
   const { currentTrials, currentIndex } = useExerciseStore();
   const Navigation = useNavigation<any>();
+  const currentTrialsRef = useRef(0);
+  const NumberOfExercises = useRef(0);
 
   useEffect(() => {
-    if (currentTrials === 0) Navigation.replace('Failure');
-  }, [currentTrials, Navigation]);
+    currentTrialsRef.current = currentTrials;
+  }, [currentTrials]);
 
   useEffect(() => {
-    setTimeout(() => {
-      if (currentIndex)
+    NumberOfExercises.current = exercises?.length || 0;
+  }, [exercises]);
+
+  useEffect(() => {
+    if (!currentTrialsRef.current) Navigation.replace('Failure');
+    else if (currentIndex && currentIndex <= NumberOfExercises.current)
+      setTimeout(() => {
         FlatListRef.current?.scrollToIndex({
           index: currentIndex - 1,
           animated: true,
         });
-    }, 200);
-  }, [currentIndex]);
+      }, 200);
+    else Navigation.replace('Success');
+  }, [currentIndex, Navigation]);
 
   const renderExercises = ({ item }: { item: IExercises }) => {
     if (item.type === 'multiple_choice')

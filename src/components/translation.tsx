@@ -102,7 +102,7 @@ const Translation: React.FC<{
               {isCorrect ? (
                 <Text style={styles.correctText}>Correct!</Text>
               ) : (
-                <View>
+                <View style={styles.incorrectContainer}>
                   <Text style={styles.incorrectText}>Incorrect</Text>
                   <Text style={styles.explanationText}>
                     {exercise.explanation}
@@ -131,6 +131,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: s(16),
     paddingVertical: s(24),
+  },
+  incorrectContainer: {
+    alignItems: 'center',
+    width: '100%',
   },
   mainContainer: {
     flex: 1,

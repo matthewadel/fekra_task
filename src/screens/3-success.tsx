@@ -19,10 +19,8 @@ const Success = () => {
   const { triggerHaptic } = useHapticFeedback();
 
   useEffect(() => {
-    // Trigger haptic feedback and celebration animation when component mounts
     triggerHaptic('success');
 
-    // Small delay to ensure the screen has loaded
     const timer = setTimeout(() => {
       setShowCelebration(true);
     }, 100);
@@ -30,11 +28,11 @@ const Success = () => {
     return () => clearTimeout(timer);
   }, [triggerHaptic]);
 
-  const handleRestartLesson = () => {
-    // Light haptic feedback on button press
-    triggerHaptic('light');
+  useEffect(() => {
+    resetExercises();
+  }, [resetExercises]);
 
-    resetExercises(); // Reset exercise state to start from beginning
+  const handleRestartLesson = () => {
     navigation.reset({
       index: 0,
       routes: [{ name: 'Start' }],
@@ -43,48 +41,51 @@ const Success = () => {
 
   return (
     <ScreenContainer style={styles.container}>
-      {/* Celebration Animation */}
-      <Balloons />
+      <View style={styles.mainContent}>
+        {/* Celebration Animation */}
+        <Balloons />
 
-      <View style={styles.iconContainer}>
-        <CelebrationAnimation
-          trigger={showCelebration}
-          size={s(96)}
-          color={Colors.primary}
-        />
-      </View>
-
-      {/* Title and Description */}
-      <Text style={styles.title}>{t('success.title')}</Text>
-      <Text style={styles.description}>{t('success.description')}</Text>
-
-      {/* Stats Cards */}
-      <View style={styles.statsContainer}>
-        {/* XP Earned Card */}
-        <View style={styles.statCard}>
-          <View style={styles.statIconContainer}>
-            <Ionicons name="star" size={s(24)} color={Colors.primary} />
-          </View>
-          <View style={styles.statContent}>
-            <Text style={styles.statLabel}>{t('success.xpEarned')}</Text>
-            <Text style={styles.statValue}>+{lesson?.xp_per_correct} XP</Text>
-          </View>
+        <View style={styles.iconContainer}>
+          <CelebrationAnimation
+            trigger={showCelebration}
+            size={s(96)}
+            color={Colors.primary}
+          />
         </View>
 
-        {/* Streak Card */}
-        <View style={styles.statCard}>
-          <View style={styles.statIconContainer}>
-            <Ionicons name="flame" size={s(24)} color={Colors.primary} />
+        {/* Title and Description */}
+        <Text style={styles.title}>{t('success.title')}</Text>
+        <Text style={styles.description}>{t('success.description')}</Text>
+
+        {/* Stats Cards */}
+        <View style={styles.statsContainer}>
+          {/* XP Earned Card */}
+          <View style={styles.statCard}>
+            <View style={styles.statIconContainer}>
+              <Ionicons name="star" size={s(24)} color={Colors.primary} />
+            </View>
+            <View style={styles.statContent}>
+              <Text style={styles.statLabel}>{t('success.xpEarned')}</Text>
+              <Text style={styles.statValue}>+{lesson?.xp_per_correct} XP</Text>
+            </View>
           </View>
-          <View style={styles.statContent}>
-            <Text style={styles.statLabel}>{t('success.streakIncreased')}</Text>
-            <Text style={styles.statValue}>
-              {t('success.streakValue', { count: currentStreak })}
-            </Text>
+
+          {/* Streak Card */}
+          <View style={styles.statCard}>
+            <View style={styles.statIconContainer}>
+              <Ionicons name="flame" size={s(24)} color={Colors.primary} />
+            </View>
+            <View style={styles.statContent}>
+              <Text style={styles.statLabel}>
+                {t('success.streakIncreased')}
+              </Text>
+              <Text style={styles.statValue}>
+                {t('success.streakValue', { count: currentStreak })}
+              </Text>
+            </View>
           </View>
         </View>
       </View>
-
       {/* Restart Lesson Button */}
       <Button
         onPress={handleRestartLesson}
@@ -107,6 +108,12 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     marginBottom: s(32),
+  },
+  mainContent: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontSize: s(28),

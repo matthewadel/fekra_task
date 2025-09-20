@@ -23,15 +23,14 @@ const Failure = () => {
       : t('failure.incorrectAnswers', { count: mistakes });
 
   useEffect(() => {
-    // Trigger error haptic feedback when component mounts
     triggerHaptic('error');
   }, [triggerHaptic]);
 
-  const handleRestartLesson = () => {
-    // Light haptic feedback on button press
-    triggerHaptic('light');
-
+  useEffect(() => {
     resetExercises();
+  }, [resetExercises]);
+
+  const handleRestartLesson = () => {
     navigation.reset({
       index: 0,
       routes: [{ name: 'Start' }],
