@@ -8,8 +8,6 @@ benefits of scrollview
 2- in small mobile phones, if the content exceeded the height of the screen, it will be scrollable and no data will be missed of the screen
 
 error boundary
-don't update timer in zustand
-submit on “Enter/Done” where relevant
 Smooth, lightweight animations for correct/incorrect and completion
 Accessible labels for buttons/inputs (accessibilityLabel); proper focus/announce after submit.
 

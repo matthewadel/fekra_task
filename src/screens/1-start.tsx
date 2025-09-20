@@ -30,7 +30,7 @@ const Start = () => {
 
   useEffect(() => {
     if (currentIndex) {
-      Navigation.navigate('Success');
+      Navigation.navigate('Exercise');
     }
   }, [currentIndex, Navigation]);
 

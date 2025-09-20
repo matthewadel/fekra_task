@@ -1,36 +1,70 @@
-import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, AppState } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { scale, moderateScale } from 'react-native-size-matters';
 import { Text, View, Colors } from '@/ui';
 import { useExerciseStore, useLessonStore } from '@/store';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 const ExerciseHeader = () => {
   const {
-    currentIndex,
     currentTimer,
-    currentTrials,
     saveTimer,
+    currentIndex,
+    currentTrials,
     currentStreak,
   } = useExerciseStore();
   const { lesson } = useLessonStore();
   const exerxcises = lesson?.exercises || [];
   const Navigation = useNavigation<any>();
+  const [timer, setTimer] = useState(currentTimer);
+
+  // Save timer when app state changes (background/inactive)
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState: string) => {
+      if (nextAppState === 'background' || nextAppState === 'inactive') {
+        saveTimer(timer);
+      }
+    };
+
+    const subscription = AppState.addEventListener(
+      'change',
+      handleAppStateChange,
+    );
+
+    return () => subscription?.remove();
+  }, [timer, saveTimer]);
+
+  // Save timer when navigating away from screen
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        // This cleanup function runs when the screen loses focus
+        saveTimer(timer);
+      };
+    }, [timer, saveTimer]),
+  );
+
+  // Save timer when component unmounts
+  useEffect(() => {
+    return () => {
+      saveTimer(timer);
+    };
+  }, [timer, saveTimer]);
 
   // Timer logic
   useEffect(() => {
-    if (currentTimer <= 0) {
+    if (timer <= 0) {
       Navigation.replace('Failure');
       return;
     }
 
-    const timer = setInterval(() => {
-      saveTimer(currentTimer - 1);
+    const timerInterval = setInterval(() => {
+      setTimer(timer - 1);
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, [currentTimer, Navigation, saveTimer]);
+    return () => clearInterval(timerInterval);
+  }, [timer, Navigation, setTimer]);
 
   // Format timer display
   const formatTime = (seconds: number): string => {
@@ -48,12 +82,10 @@ const ExerciseHeader = () => {
         <Icon
           name="access-time"
           size={moderateScale(18)}
-          color={currentTimer <= 10 ? Colors.red : Colors.primary}
+          color={timer <= 10 ? Colors.red : Colors.primary}
         />
-        <Text
-          style={[styles.timerText, currentTimer <= 10 && styles.timerWarning]}
-        >
-          {formatTime(currentTimer)}
+        <Text style={[styles.timerText, timer <= 10 && styles.timerWarning]}>
+          {formatTime(timer)}
         </Text>
       </View>
 
