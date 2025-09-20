@@ -12,8 +12,10 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useRef } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { s } from 'react-native-size-matters';
+import { useTranslation } from 'react-i18next';
 
 const Exercise = () => {
+  const { t } = useTranslation();
   const { lesson } = useLessonStore();
   const exercises = lesson?.exercises;
   const FlatListRef = useRef<FlatList<IExercises>>(null);
@@ -49,7 +51,7 @@ const Exercise = () => {
       return <Translation exercise={item} />;
     else if (item.type === 'match_pairs') return <MatchPairs exercise={item} />;
     else if (item.type === 'word_bank') return <Complete exercise={item} />;
-    else return <Text>This question is not supported yet</Text>;
+    else return <Text>{t('exercise.notSupported')}</Text>;
   };
 
   const itemSeperatorComponent = () => <View style={{ width: s(20) }} />;

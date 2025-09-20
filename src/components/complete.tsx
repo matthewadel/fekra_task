@@ -6,10 +6,12 @@ import { s } from 'react-native-size-matters';
 import { ExerciseButton } from './exercise-button';
 import { useExerciseStore, useLessonStore } from '@/store';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useTranslation } from 'react-i18next';
 
 const Complete: React.FC<{
   exercise: IExercises;
 }> = ({ exercise }) => {
+  const { t } = useTranslation();
   const { width } = useWindowDimensions();
   const { decrementTrials, incrementStreak } = useExerciseStore();
   const { saveUserAnswer } = useLessonStore();
@@ -111,7 +113,7 @@ const Complete: React.FC<{
     <View style={[styles.container, { width: width - s(40) }]}>
       <View style={styles.mainContainer}>
         {/* Title */}
-        <Text style={styles.title}>Complete the sentence</Text>
+        <Text style={styles.title}>{t('exercise.complete.title')}</Text>
 
         {/* Sentence with placeholders */}
         <View style={styles.sentenceContainer}>

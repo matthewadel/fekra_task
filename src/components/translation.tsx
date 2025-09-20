@@ -5,10 +5,12 @@ import { IExercises } from '@/types';
 import { s } from 'react-native-size-matters';
 import { ExerciseButton } from './exercise-button';
 import { useExerciseStore, useLessonStore } from '@/store';
+import { useTranslation } from 'react-i18next';
 
 const Translation: React.FC<{
   exercise: IExercises;
 }> = ({ exercise }) => {
+  const { t } = useTranslation();
   const { width } = useWindowDimensions();
   const [userInput, setUserInput] = useState('');
   const [isAnswered, setIsAnswered] = useState(false);
@@ -76,7 +78,7 @@ const Translation: React.FC<{
       <View style={styles.mainContainer}>
         {/* Title */}
         <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
-          Type the translation
+          {t('exercise.translation.title')}
         </Text>
 
         {/* Sentence to translate */}
@@ -86,7 +88,7 @@ const Translation: React.FC<{
         <View style={styles.inputContainer}>
           <TextInput
             style={getInputStyle()}
-            placeholder="Type your answer here..."
+            placeholder={t('exercise.translation.TypeAnswer')}
             placeholderTextColor={Colors.lightBorder}
             value={userInput}
             onChangeText={handleTextChange}

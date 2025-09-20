@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { CelebrationAnimation } from '@/components';
 import { useHapticFeedback } from '@/hooks';
-import { Balloons } from 'react-native-fiesta';
 
 const Success = () => {
   const { t } = useTranslation();
@@ -42,9 +41,6 @@ const Success = () => {
   return (
     <ScreenContainer style={styles.container}>
       <View style={styles.mainContent}>
-        {/* Celebration Animation */}
-        <Balloons />
-
         <View style={styles.iconContainer}>
           <CelebrationAnimation
             trigger={showCelebration}

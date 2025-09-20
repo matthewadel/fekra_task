@@ -7,9 +7,6 @@ benefits of scrollview
 1- scroll if there is a keyboard in the screen
 2- in small mobile phones, if the content exceeded the height of the screen, it will be scrollable and no data will be missed of the screen
 
-Smooth, lightweight animations for correct/incorrect and completion
-Accessible labels for buttons/inputs (accessibilityLabel); proper focus/announce after submit.
-
 testing
 Testing Requirements (Automated)
 Unit/Component — Jest + React Native Testing Library
@@ -23,3 +20,6 @@ E2E — Detox (or Maestro)
 • Accessibility smoke checks: buttons have discernible names; tab/next actions usable.
 • Responsive: small-screen device (e.g., 360×800) renders without horizontal scroll.
 (These test goals reflect the original web assessment’s intent, translated to RN.)
+
+Smooth, lightweight animations for correct/incorrect and completion
+Accessible labels for buttons/inputs (accessibilityLabel); proper focus/announce after submit.

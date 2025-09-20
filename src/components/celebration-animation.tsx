@@ -23,7 +23,7 @@ const CelebrationAnimation: React.FC<CelebrationAnimationProps> = ({
       // Simple scale up animation
       Animated.sequence([
         Animated.spring(scaleAnim, {
-          toValue: 1.2,
+          toValue: 1.5,
           useNativeDriver: true,
         }),
         Animated.spring(scaleAnim, {
@@ -36,7 +36,7 @@ const CelebrationAnimation: React.FC<CelebrationAnimationProps> = ({
       Animated.loop(
         Animated.sequence([
           Animated.timing(bounceAnim, {
-            toValue: 1.05,
+            toValue: 1.5,
             duration: 800,
             useNativeDriver: true,
           }),

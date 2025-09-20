@@ -12,7 +12,22 @@
   },
   "exercise": {
     "continue": "Continue",
-    "check": "Check"
+    "check": "Check",
+    "notSupported": "This question is not supported yet",
+    "translation": {
+      "title": "Type the translation",
+      "TypeAnswer": "Type your answer here..."
+    },
+    "complete": {
+      "title": "Complete the sentence"
+    },
+    "matchPairs": {
+      "title": "Match the pairs",
+      "instruction": "Drag items to match:",
+      "dragHere": "📍 Drag here",
+      "correct": "✓ Correct! Well done!",
+      "incorrect": "✗ Try again!"
+    }
   },
   "success": {
     "title": "Lesson Complete!",
