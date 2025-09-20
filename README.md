@@ -1,10 +1,6 @@
 # Fekra Task - Language Learning App
 
-A React Native language learning application that provides interactive exercises for learning Spanish, featuring multiple exercise types, progress tracking, and bilingual support (English/Arabic).
-
-## 📱 App Overview
-
-Fekra Task is designed as an educational mobile app similar to Duolingo, focusing on Spanish language learning through interactive exercises. The app features a clean, intuitive interface with comprehensive accessibility support and state persistence.
+A React Native language learning application that provides interactive exercises for learning, featuring multiple exercise types, progress tracking, and bilingual support (English/Arabic).
 
 ## 🏗️ Architecture & Design Patterns
 
@@ -18,13 +14,13 @@ Fekra Task is designed as an educational mobile app similar to Duolingo, focusin
 
 - **React Navigation v6** with Native Stack Navigator
 - Screen-based navigation: Start → Exercise → Success/Failure
-- No headers for custom UI design
 
 ### Internationalization
 
 - **i18next** for multi-language support
 - Dynamic language switching (English/Arabic)
 - RTL support for Arabic language
+- to avoid app restart after each language change, i have created handle-rtl file which is responsible of handling RTL in the app without the need for app restart
 
 ### Styling & Responsiveness
 
@@ -277,12 +273,6 @@ src/
 - **Usage:** Drag and drop, swipe interactions in exercises
 - **Benefits:** Native gesture processing, better performance
 
-#### **Shopify Skia (@shopify/react-native-skia)**
-
-- **Purpose:** 2D graphics rendering
-- **Usage:** Custom animations and visual effects
-- **Benefits:** Hardware acceleration, cross-platform consistency
-
 #### **React Native Vector Icons (react-native-vector-icons)**
 
 - **Purpose:** Icon library with multiple icon sets
@@ -308,26 +298,6 @@ src/
 - **Purpose:** Safe area management
 - **Usage:** Proper padding for notched devices
 - **Benefits:** Automatic safe area detection, cross-platform support
-
-### Development & Testing
-
-#### **TypeScript (typescript)**
-
-- **Purpose:** Type safety and better development experience
-- **Usage:** Static typing across the entire codebase
-- **Benefits:** Better IDE support, compile-time error detection
-
-#### **Jest + React Native Testing Library**
-
-- **Purpose:** Unit and component testing
-- **Usage:** Automated testing of components and user interactions
-- **Benefits:** Comprehensive testing utilities, snapshot testing
-
-#### **Babel Module Resolver (babel-plugin-module-resolver)**
-
-- **Purpose:** Absolute import paths
-- **Usage:** Clean imports using `@/` prefix
-- **Benefits:** Better code organization, easier refactoring
 
 ## 📱 Features
 
@@ -358,25 +328,6 @@ src/
 - **Progress Tracking:** Visual progress indicators and streak counting
 - **Error Handling:** Graceful error states with retry mechanisms
 - **Offline Support:** Core functionality works without internet
-
-## 🧪 Testing Strategy
-
-### Unit/Component Testing (Jest + React Native Testing Library)
-
-- **Screen Rendering:** Validates that screens render correctly
-- **User Interactions:** Tests button taps, input changes, gesture interactions
-- **Exercise Logic:** Validates answer checking, scoring, and progress tracking
-- **State Management:** Tests Zustand store actions and state changes
-- **Persistence:** Mocked AsyncStorage testing for data persistence
-
-### Test Coverage Areas
-
-- **Start Screen:** Language toggle, lesson start functionality
-- **Exercise Components:** Answer validation, scoring, navigation
-- **Multiple Choice:** Correct/incorrect selection handling
-- **Type Answer:** Input validation, case normalization, trimming
-- **Word Bank:** Drag and drop ordering, sequence validation
-- **State Persistence:** Progress restoration from AsyncStorage
 
 ## 🚀 Getting Started
 
