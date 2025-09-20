@@ -63,66 +63,134 @@ const Start = () => {
         style={styles.langToggle}
         onPress={handleLanguageToggle}
         textStyle={styles.langToggleText}
+        accessibilityRole="button"
+        accessibilityLabel={t('startLesson.accessibility.languageToggleLabel')}
+        accessibilityHint={t('startLesson.accessibility.languageToggleHint')}
       >
         {t('startLesson.languageToggle')}
       </TouchableOpacity>
 
       {/* Main Content */}
-      <View style={styles.main}>
-        <Text style={styles.lessonTitle}>{lesson?.title}</Text>
+      <View
+        style={styles.main}
+        accessibilityLabel={t('startLesson.accessibility.screenTitle')}
+      >
+        <Text
+          style={styles.lessonTitle}
+          accessibilityRole="header"
+          accessibilityLabel={t('startLesson.accessibility.lessonTitleLabel', {
+            title: lesson?.title || '',
+          })}
+        >
+          {lesson?.title}
+        </Text>
 
         {/* Lesson Stats */}
         {lesson && (
           <View style={styles.lessonStats}>
-            <View style={styles.statItem}>
+            <View
+              style={styles.statItem}
+              accessibilityRole="text"
+              accessibilityLabel={t(
+                'startLesson.accessibility.streakBonusLabel',
+                { bonus: lesson.streak_increment },
+              )}
+            >
               <MaterialIcons
                 name="local-fire-department"
                 size={s(18)}
                 color="#FF6B35"
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no-hide-descendants"
               />
               <View style={styles.statContent}>
                 <Text
                   numberOfLines={1}
                   adjustsFontSizeToFit
                   style={styles.statLabel}
+                  accessibilityElementsHidden={true}
                 >
                   {t('startLesson.streakBonus')}
                 </Text>
-                <Text style={styles.statValue}>+{lesson.streak_increment}</Text>
+                <Text
+                  style={styles.statValue}
+                  accessibilityElementsHidden={true}
+                >
+                  +{lesson.streak_increment}
+                </Text>
               </View>
             </View>
 
             <View style={styles.statDivider} />
 
-            <View style={styles.statItem}>
-              <FontAwesome name="star" size={s(18)} color="#FFD700" />
+            <View
+              style={styles.statItem}
+              accessibilityRole="text"
+              accessibilityLabel={t(
+                'startLesson.accessibility.xpPerCorrectLabel',
+                { xp: lesson.xp_per_correct },
+              )}
+            >
+              <FontAwesome
+                name="star"
+                size={s(18)}
+                color="#FFD700"
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no-hide-descendants"
+              />
               <View style={styles.statContent}>
                 <Text
                   numberOfLines={1}
                   adjustsFontSizeToFit
                   style={styles.statLabel}
+                  accessibilityElementsHidden={true}
                 >
                   {t('startLesson.xpPerCorrect')}
                 </Text>
-                <Text style={styles.statValue}>{lesson.xp_per_correct} XP</Text>
+                <Text
+                  style={styles.statValue}
+                  accessibilityElementsHidden={true}
+                >
+                  {lesson.xp_per_correct} XP
+                </Text>
               </View>
             </View>
           </View>
         )}
 
         {/* Time Estimate Card */}
-        <View style={styles.timeCard}>
-          <FontAwesome name="clock-o" size={s(24)} color={Colors.primary} />
+        <View
+          style={styles.timeCard}
+          accessibilityRole="text"
+          accessibilityLabel={t('startLesson.accessibility.timeEstimateLabel', {
+            time: t('startLesson.timeMinutes'),
+          })}
+        >
+          <FontAwesome
+            name="clock-o"
+            size={s(24)}
+            color={Colors.primary}
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no-hide-descendants"
+          />
           <View style={styles.timeInfo}>
-            <Text style={styles.timeLabel}>
+            <Text style={styles.timeLabel} accessibilityElementsHidden={true}>
               {t('startLesson.estimatedTime')}
             </Text>
-            <Text style={styles.timeValue}>{t('startLesson.timeMinutes')}</Text>
+            <Text style={styles.timeValue} accessibilityElementsHidden={true}>
+              {t('startLesson.timeMinutes')}
+            </Text>
           </View>
         </View>
       </View>
 
-      <Button onPress={handleStartLesson} style={styles.buttonStyle}>
+      <Button
+        onPress={handleStartLesson}
+        style={styles.buttonStyle}
+        accessibilityRole="button"
+        accessibilityLabel={t('startLesson.accessibility.startButtonLabel')}
+        accessibilityHint={t('startLesson.accessibility.startButtonHint')}
+      >
         {t('startLesson.startButton')}
       </Button>
     </ScreenContainer>

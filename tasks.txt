@@ -1,0 +1,16 @@
+using zustand instead of redux and context
+fonts
+lang is only from zustand
+absolute import
+json server to mock the api request instead of using promise.resolve
+benefits of scrollview
+1- scroll if there is a keyboard in the screen
+2- in small mobile phones, if the content exceeded the height of the screen, it will be scrollable and no data will be missed of the screen
+
+testing
+Unit/Component — Jest + React Native Testing Library
+• Renders LessonStart and begins lesson on tap.
+• MCQ: selecting correct marks correct; wrong subtracts a heart.
+• Type Answer: trims/case-normalizes input and validates.
+• Word Bank: ordering enforced; correct sequence passes.
+• Persistence: progress restored from AsyncStorage (mocked).

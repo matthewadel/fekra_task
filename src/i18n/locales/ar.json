@@ -8,7 +8,19 @@
     "languageToggle": "EN",
     "startButton": "ابدأ الدرس",
     "streakBonus": "مكافأة التسلسل",
-    "xpPerCorrect": "XP للإجابة الصحيحة"
+    "xpPerCorrect": "XP للإجابة الصحيحة",
+    "accessibility": {
+      "languageToggleLabel": "التبديل إلى اللغة الإنجليزية",
+      "languageToggleHint": "يغير لغة التطبيق إلى الإنجليزية",
+      "startButtonLabel": "زر بدء الدرس",
+      "startButtonHint": "اضغط لبدء الدرس",
+      "screenTitle": "شاشة بدء الدرس",
+      "streakBonusLabel": "مكافأة التسلسل: {{bonus}} نقطة",
+      "xpPerCorrectLabel": "نقاط الخبرة لكل إجابة صحيحة: {{xp}} XP",
+      "timeEstimateLabel": "الوقت المتوقع للإنجاز: {{time}}",
+      "lessonStatsLabel": "إحصائيات الدرس",
+      "lessonTitleLabel": "عنوان الدرس: {{title}}"
+    }
   },
   "exercise": {
     "continue": "استمر",

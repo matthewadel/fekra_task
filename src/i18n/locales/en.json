@@ -8,7 +8,19 @@
     "languageToggle": "عربي",
     "startButton": "Start Lesson",
     "streakBonus": "Streak Bonus",
-    "xpPerCorrect": "XP per Correct"
+    "xpPerCorrect": "XP per Correct",
+    "accessibility": {
+      "languageToggleLabel": "Switch to Arabic language",
+      "languageToggleHint": "Changes the app language to Arabic",
+      "startButtonLabel": "Start lesson button",
+      "startButtonHint": "Tap to begin the lesson",
+      "screenTitle": "Start lesson screen",
+      "streakBonusLabel": "Streak bonus: {{bonus}} points",
+      "xpPerCorrectLabel": "Experience points per correct answer: {{xp}} XP",
+      "timeEstimateLabel": "Estimated completion time: {{time}}",
+      "lessonStatsLabel": "Lesson statistics",
+      "lessonTitleLabel": "Lesson title: {{title}}"
+    }
   },
   "exercise": {
     "continue": "Continue",
