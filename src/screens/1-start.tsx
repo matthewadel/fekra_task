@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useExerciseStore, useLanguageStore } from '@/store';
+import { useExerciseStore, useLanguageStore, useLessonStore } from '@/store';
 import { useNavigation } from '@react-navigation/native';
 import {
   Text,
@@ -20,7 +20,8 @@ const Start = () => {
   const { t } = useTranslation();
   const { currentLanguage, setLanguage } = useLanguageStore();
   const Navigation = useNavigation<any>();
-  const { lesson, loading, error, refetch } = useGetLesson();
+  const { loading, error, refetch } = useGetLesson();
+  const { lesson } = useLessonStore();
   const { currentIndex, increaseCurrentIndex } = useExerciseStore();
 
   const handleLanguageToggle = async () => {
@@ -30,12 +31,16 @@ const Start = () => {
 
   useEffect(() => {
     if (currentIndex) {
+      if (lesson?.exercises[currentIndex - 1].userAnswer)
+        increaseCurrentIndex();
       Navigation.navigate('Exercise');
     }
-  }, [currentIndex, Navigation]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex, Navigation, lesson]);
+  console.log('lesson', lesson);
   const handleStartLesson = () => {
-    increaseCurrentIndex();
+    if (!currentIndex || lesson?.exercises[currentIndex - 1].userAnswer)
+      increaseCurrentIndex();
     Navigation.navigate('Exercise');
   };
 

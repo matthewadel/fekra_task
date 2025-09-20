@@ -4,7 +4,7 @@ import { useWindowDimensions, StyleSheet } from 'react-native';
 import { IExercises } from '@/types';
 import { s } from 'react-native-size-matters';
 import { ExerciseButton } from './exercise-button';
-import { useExerciseStore } from '@/store';
+import { useExerciseStore, useLessonStore } from '@/store';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Complete: React.FC<{
@@ -12,6 +12,7 @@ const Complete: React.FC<{
 }> = ({ exercise }) => {
   const { width } = useWindowDimensions();
   const { decrementTrials, incrementStreak } = useExerciseStore();
+  const { saveUserAnswer } = useLessonStore();
 
   // State for selected answers in order
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>(
@@ -71,6 +72,9 @@ const Complete: React.FC<{
       const correct = userAnswer === correctAnswer;
 
       setIsCorrect(correct);
+
+      // Save user answer to the exercise object (save the array of selected answers)
+      saveUserAnswer(exercise.id, selectedAnswers);
 
       if (correct) incrementStreak();
       else decrementTrials();

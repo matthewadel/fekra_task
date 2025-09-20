@@ -4,18 +4,23 @@ import { useWindowDimensions, StyleSheet } from 'react-native';
 import { IExercises } from '@/types';
 import { s } from 'react-native-size-matters';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useExerciseStore } from '@/store';
+import { useExerciseStore, useLessonStore } from '@/store';
 import { ExerciseButton } from './exercise-button';
 
 const MultipleChoice: React.FC<{
   exercise: IExercises;
 }> = ({ exercise }) => {
   const { decrementTrials, incrementStreak } = useExerciseStore();
+  const { saveUserAnswer } = useLessonStore();
   const { width } = useWindowDimensions();
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
   const handleAnswerPress = (choice: string) => {
     setSelectedAnswer(choice);
+
+    // Save user answer to the exercise object
+    saveUserAnswer(exercise.id, choice);
+
     if (choice === exercise.answer) incrementStreak();
     else decrementTrials();
   };

@@ -8,4 +8,5 @@ export interface IExercises {
   type: string;
   tolerance: Record<string, boolean>;
   pairs: { left: string; right: string }[];
+  userAnswer?: string | string[]; // User's answer - undefined until answered
 }

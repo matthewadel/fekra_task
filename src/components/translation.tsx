@@ -4,7 +4,7 @@ import { useWindowDimensions, TextInput, StyleSheet } from 'react-native';
 import { IExercises } from '@/types';
 import { s } from 'react-native-size-matters';
 import { ExerciseButton } from './exercise-button';
-import { useExerciseStore } from '@/store';
+import { useExerciseStore, useLessonStore } from '@/store';
 
 const Translation: React.FC<{
   exercise: IExercises;
@@ -14,6 +14,7 @@ const Translation: React.FC<{
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const { decrementTrials, incrementStreak } = useExerciseStore();
+  const { saveUserAnswer } = useLessonStore();
 
   const handleTextChange = (text: string) => {
     setUserInput(text);
@@ -52,6 +53,9 @@ const Translation: React.FC<{
       setIsAnswered(true);
       const correct = validateAnswer(userInput);
       setIsCorrect(correct);
+
+      // Save user answer to the exercise object
+      saveUserAnswer(exercise.id, userInput);
 
       if (correct) incrementStreak();
       else decrementTrials();
