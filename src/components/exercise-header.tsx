@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, AppState } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { scale, moderateScale } from 'react-native-size-matters';
@@ -18,12 +18,17 @@ const ExerciseHeader = () => {
   const exerxcises = lesson?.exercises || [];
   const Navigation = useNavigation<any>();
   const [timer, setTimer] = useState(currentTimer);
+  const timerRef = useRef(0);
+
+  useEffect(() => {
+    timerRef.current = timer;
+  }, [timer]);
 
   // Save timer when app state changes (background/inactive)
   useEffect(() => {
     const handleAppStateChange = (nextAppState: string) => {
       if (nextAppState === 'background' || nextAppState === 'inactive') {
-        saveTimer(timer);
+        saveTimer(timerRef.current);
       }
     };
 
@@ -33,24 +38,24 @@ const ExerciseHeader = () => {
     );
 
     return () => subscription?.remove();
-  }, [timer, saveTimer]);
+  }, [saveTimer]);
 
   // Save timer when navigating away from screen
   useFocusEffect(
     React.useCallback(() => {
       return () => {
         // This cleanup function runs when the screen loses focus
-        saveTimer(timer);
+        saveTimer(timerRef.current);
       };
-    }, [timer, saveTimer]),
+    }, [saveTimer]),
   );
 
   // Save timer when component unmounts
   useEffect(() => {
     return () => {
-      saveTimer(timer);
+      saveTimer(timerRef.current);
     };
-  }, [timer, saveTimer]);
+  }, [saveTimer]);
 
   // Timer logic
   useEffect(() => {
